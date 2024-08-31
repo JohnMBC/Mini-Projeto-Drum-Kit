@@ -48,7 +48,7 @@ main{
     font-size: calc(3vw + 20px);
     user-select: none;
     cursor: pointer;
-    transition: transform .3s;
+    transition: transform .1s;
 }
 
 .active{
@@ -61,5 +61,5 @@ main{
     transform: scale(1.1);
     border-color: white;
     box-shadow: 0 0 50px white;
-    transition: transform .3s;
+    transition: transform .1s;
 }

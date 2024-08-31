@@ -17,6 +17,7 @@ const criarDiv = (texto) => {
     div.classList.add('key');
     div.textContent = texto;
     div.id = texto;
+
     document.getElementById('container').appendChild(div);
 }
 
@@ -25,6 +26,7 @@ const criarDivTitle = (texto) => {
     div.classList.add('title__main');
     div.textContent = texto;
     div.id = texto;
+
     document.getElementById('title').appendChild(div);
 }
 criarDivTitle('Louvai ao Senhor!')
@@ -38,23 +40,34 @@ const tocarSom = (letra) => {
     audio.play();
 }
 const adicionarEfeito = (letra) => {
-    const elemento = document.getElementById(letra);
-    elemento.classList.add('active');
-    setTimeout(() => {
-        elemento.classList.remove('active')
-    }, 150);
-}
+    const div = document.getElementById(letra);
+        div.classList.add('active');
 
+    const removerEfeito = (letra) => {
+        const div = document.getElementById(letra);
+        const removeActive = () => div.classList.remove('active');
+        div.addEventListener('transitionend', removeActive);
+    };
+    removerEfeito(letra);
+
+}
 const ativarDiv = (evento) => {
-    const letra = evento.srcElement.id;
-    const letraPermitida = sons.hasOwnProperty(letra);
-    if (letraPermitida) {
+    let letra = "";
+    if (evento.type === 'click') {
+        letra = evento.srcElement.id;
+    } else if (evento.type === 'keydown') {
+        letra = evento.key.toUpperCase();
+    }
+
+    if (sons.hasOwnProperty(letra)) {
         adicionarEfeito(letra);
         tocarSom(letra);
-        removerEfeito(letra);
     }
 }
+
 exibir(sons)
 
 document.getElementById('container')
     .addEventListener('click', ativarDiv);
+
+window.addEventListener('keydown', ativarDiv);
