@@ -1,7 +1,7 @@
 'use strict';
 
 const sons = {
-    'A': 'bom.wav',
+    'A': 'boom.wav',
     'S': 'clap.wav',
     'D': 'hihat.wav',
     'F': 'kick.wav',
@@ -20,7 +20,7 @@ const criarDiv = (texto) => {
     document.getElementById('container').appendChild(div);
 
 }
- 
+
 const criarDivTitle = (texto) => {
     const div = document.createElement('div');
     div.classList.add('title__main');
@@ -31,9 +31,25 @@ const criarDivTitle = (texto) => {
 }
 criarDivTitle('Louvai ao Senhor!')
 
-const letras = (sons) => {
+const exibir = (sons) => {
     Object.keys(sons).forEach(criarDiv);
 
 }
-letras(sons)
 
+const tocarSom = (letra)=> {
+    const audio = new Audio(`./sounds/${sons[letra]}`);
+    audio.play();
+}
+
+const ativarDiv = (evento) => {
+    const letra = evento.srcElement.id;
+    tocarSom (letra);
+   
+
+}
+
+exibir(sons)
+
+document.getElementById('container')
+    .addEventListener('click', ativarDiv);
+ 
