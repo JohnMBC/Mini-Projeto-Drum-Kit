@@ -18,7 +18,6 @@ const criarDiv = (texto) => {
     div.textContent = texto;
     div.id = texto;
     document.getElementById('container').appendChild(div);
-
 }
 
 const criarDivTitle = (texto) => {
@@ -27,29 +26,26 @@ const criarDivTitle = (texto) => {
     div.textContent = texto;
     div.id = texto;
     document.getElementById('title').appendChild(div);
-
 }
 criarDivTitle('Louvai ao Senhor!')
 
 const exibir = (sons) => {
     Object.keys(sons).forEach(criarDiv);
-
 }
 
-const tocarSom = (letra)=> {
+const tocarSom = (letra) => {
     const audio = new Audio(`./sounds/${sons[letra]}`);
     audio.play();
 }
 
 const ativarDiv = (evento) => {
     const letra = evento.srcElement.id;
-    tocarSom (letra);
-   
-
+    const letraPermitida = sons.hasOwnProperty(letra);
+    if (letraPermitida) {
+        tocarSom(letra);
+    }
 }
-
 exibir(sons)
 
 document.getElementById('container')
     .addEventListener('click', ativarDiv);
- 
