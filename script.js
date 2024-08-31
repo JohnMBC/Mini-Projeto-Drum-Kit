@@ -37,12 +37,21 @@ const tocarSom = (letra) => {
     const audio = new Audio(`./sounds/${sons[letra]}`);
     audio.play();
 }
+const adicionarEfeito = (letra) => {
+    const elemento = document.getElementById(letra);
+    elemento.classList.add('active');
+    setTimeout(() => {
+        elemento.classList.remove('active')
+    }, 150);
+}
 
 const ativarDiv = (evento) => {
     const letra = evento.srcElement.id;
     const letraPermitida = sons.hasOwnProperty(letra);
     if (letraPermitida) {
+        adicionarEfeito(letra);
         tocarSom(letra);
+        removerEfeito(letra);
     }
 }
 exibir(sons)
